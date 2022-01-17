@@ -23,28 +23,26 @@ function stringProcessing(str) {
 
 }
 stringProcessing("abcd*lmn*ll(oo&&ttll");
-function encode(num, base) {
-        let res="";
-        do {
-                const digit = Math.trunc(num % base);
-                const symb = getSymbol(digit);
-                res = symb + res;
-                num = Math.trunc(num / base);
-
-        } while(num >= 1);
-        return res;
-}
-function getSymbol(digit) {
-      //base from 2 to 10 
-      console.log(digit);
-      return "" + digit;
-}
-console.log(encode(10, 2))
-// write function 
 function encode (num, codingString) {
-        //codingString - any string with no repeated symbols
-        // you should validate codingString doesn't contain repeated symbols
-        //base = length of codingString
-        // algorithm the same as specified above
-        // getSymbol(digit, codingString) using operator []
+    let sym = 1;
+        for (let i = 0; i < codingString.length - 1; i++) {
+            if (codingString[i] == codingString[i + 1]){
+                return console.log("Please choose another codingString.");
+            }
+            sym++;
+        }   
+    let res="";
+        do {
+            const digit = Math.trunc(num % sym);
+            const symb = getSymbol(digit, codingString);
+            res = symb + res;
+            num = Math.trunc(num / sym);
+        } while(num >= 1);
+    return res;
 }
+
+function getSymbol(digit, codingString) {
+    return "" + codingString[digit];
+}
+
+console.log(encode(45, "abcde")); 
