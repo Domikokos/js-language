@@ -1,48 +1,41 @@
-/*************************Strings */
-const str1 = "abc";
-const str2 = "abc";
-console.log(`str1 == str2 is ${str1 == str2}`)
-console.log(`"abc" < "ab" is ${str1 < "ab"}`)
-console.log(`"123" > 23 is ${"123" > 23}`);
-console.log(`"123" > "23" is ${"123" > "23"}`);
-/****************************************** */
-//if  logical expression contains both string and number, JS will convert string to number
-//if string doesn't contain a number a result of conversion will be NaN
-//In any logical expression if there is NaN, then the result will be false
-console.log(`"abc" > 23 is ${"abc" > 23}`);
-console.log(`"abc" < 23 is ${"abc" < 23}`);
-console.log(`"abc" != 23 is ${!("abc" == 23)}`)
-/********************************************* */
-function stringProcessing(str) {
-        const strP = "" + str;
-       console.log(`"${str}"[4] is ${str[4]}`);
-       console.log(`length of "${str}" is ${strP.length}`);
-       console.log(`"${str}" includes "abc" is ${strP.includes("abc")}`);
-       console.log(`substring of "${str}" beginning from index 2 to index 5 is ${strP.substring(2, 5)}`);
-       console.log(`index of substring "ll" in the "${str}" is ${strP.indexOf("ll")}; last index of substring "ll" in the "${str}" is  ${strP.lastIndexOf("ll")}`)
+// const ar = [-10, 50, -12, 80, 40];
+// ar.push(70);
+// // str - "-10#50#-12#80#40#70"
+// //******************Solution based on substring */
+// // let str = '';
+// // ar.forEach(function(n){
+// //     str += n + '#';
+// // })
+// // str = str.substring(0, str.length - 1);
+// // const lastSharpIndex = str.lastIndexOf('#');
+// // const str1 = str.substring(0, lastSharpIndex);
+// // const str2 = str.substring(lastSharpIndex + 1);
+// // str = str1 + str2;
+// //******************Solution based on forEach form second number */
+// // const ar1 = ar.slice(1);
+// // let str = '' + ar[0];
+// // ar1.forEach(n => str += '#' + n);
+// // console.log(str);
+// //*******************Printing out sequense number of element, element, length of array */
+// //1 of 5 - 10;   ....
+// ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
 
-}
-stringProcessing("abcd*lmn*ll(oo&&ttll");
-function encode (num, codingString) {
-    let sym = 1;
-        for (let i = 0; i < codingString.length - 1; i++) {
-            if (codingString[i] == codingString[i + 1]){
-                return console.log("Please choose another codingString.");
-            }
-            sym++;
-        }   
-    let res="";
-        do {
-            const digit = Math.trunc(num % sym);
-            const symb = getSymbol(digit, codingString);
-            res = symb + res;
-            num = Math.trunc(num / sym);
-        } while(num >= 1);
-    return res;
-}
+// //****************************************** */
+// // method "map"
+// //use case of applying method map : you want to create new array with elements that are received as result of some conversion
+// //example you want to get new array with elements that are muliplication on 2 of each source element
+// const ar2 = ar.map(n => n * 2);
+// console.log(ar2);
+// someFunction();
 
-function getSymbol(digit, codingString) {
-    return "" + codingString[digit];
-}
+const ar20 = [13, 17, 20, 23, 2, 40];
+const arEvenOdd = ar20.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
+console.log(arEvenOdd);
 
-console.log(encode(45, "abcde")); 
+const res = ar20.reduce((res, cur) => res + cur, 0);
+console.log(res);
+const max = ar20.reduce((max, cur) => cur > max )
+console.log(max);
+console.log(res);
+res = ar20.reduce((res, cur) => res + cur);
+
