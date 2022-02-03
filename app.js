@@ -1,41 +1,74 @@
-// const ar = [-10, 50, -12, 80, 40];
-// ar.push(70);
-// // str - "-10#50#-12#80#40#70"
-// //******************Solution based on substring */
-// // let str = '';
-// // ar.forEach(function(n){
-// //     str += n + '#';
-// // })
-// // str = str.substring(0, str.length - 1);
-// // const lastSharpIndex = str.lastIndexOf('#');
-// // const str1 = str.substring(0, lastSharpIndex);
-// // const str2 = str.substring(lastSharpIndex + 1);
-// // str = str1 + str2;
-// //******************Solution based on forEach form second number */
-// // const ar1 = ar.slice(1);
-// // let str = '' + ar[0];
-// // ar1.forEach(n => str += '#' + n);
-// // console.log(str);
-// //*******************Printing out sequense number of element, element, length of array */
-// //1 of 5 - 10;   ....
-// ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
-
-// //****************************************** */
-// // method "map"
-// //use case of applying method map : you want to create new array with elements that are received as result of some conversion
-// //example you want to get new array with elements that are muliplication on 2 of each source element
-// const ar2 = ar.map(n => n * 2);
-// console.log(ar2);
-// someFunction();
-
-const ar20 = [13, 17, 20, 23, 2, 40];
-const arEvenOdd = ar20.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
-console.log(arEvenOdd);
-
-const res = ar20.reduce((res, cur) => res + cur, 0);
-console.log(res);
-const max = ar20.reduce((max, cur) => cur > max )
-console.log(max);
-console.log(res);
-res = ar20.reduce((res, cur) => res + cur);
-
+const circle = {radius: 20, square: function(){
+    return 3.14 * (this.radius ** 2)
+}, perimeter: () => 2 * 3.14 * this.radius,
+toString: function(){
+    return `radius of this circle is ${this.radius}`
+}};
+console.log(`square=${circle.square()}, perimeter=${circle.perimeter()}`);
+//circle.square will be converted to square(circle) where circle as argument value,
+// "this" is the hidden parameter in the function
+// in any arrow function there is not "this"
+function square(circle){
+    return 3.14 * (circle.radius ** 2);
+}
+console.log(`circle: ${circle}`)
+const circle1 = {radius: 20, perimeter: function() {
+    return 2 * 3.14 * this.radius},
+toString: function(){
+    return `radius of this circle is ${this.radius}`
+}};
+//circle1.square(); error because the method square is not defined inside object circle
+function Circle(radius) {
+    this.radius = radius;
+}
+Circle.prototype.square = function() {
+    3.14 * (this.radius ** 2);
+}
+Circle.prototype.perimeter = function() {
+    return 2 * 3.14 * this.radius
+}
+Circle.prototype.toString = function() {
+    return `radius of this circle is ${this.radius}`
+}
+const circle10 = new Circle(10);
+/**********************HW 16 definition */
+// const d = new Deferred()
+// d.then(function(res){ console.log('1', res); return 'a'; });
+// d.then(function(res){ console.log('2', res); return 'b'; });
+// d.then(function(res){ console.log('3', res); return 'c'; });
+// d.resolve('hello');
+//Output:
+//1 hello
+//2 a
+//3 b
+/*************************************** */
+// const myArray = new MyArray(10);
+//myArray.get(index) - result 10
+//write method get getting an index value and returning common value (set in constructor)
+//myArray.set(index, value);
+//write method set that sets a given value at a given index
+//myArray.setValue(value) - sets new value in all elements of myArray
+//Example:
+// const myArray = new MyArray(10);
+// console.log(myArray.get(100)) //displayed out 10
+// myArray.set(100, 500) //sets 500 at index 100
+// console.log(myArray.get(200)) //displayed out 10
+// console.log(myArray.get(100)) //displayed out 500
+// myArray.setValue(300);
+// console.log(myArray.get(100)) //displayed out 300
+// console.log(myArray.get(200)) //displayed out 300
+/************************************************ */
+Array.prototype.filter = function(callbackPredicate) {
+    console.log('Tel-Ran copyright')
+    const res = []
+    this.forEach((n, i, a) => !callbackPredicate(n, i, a) && res.push(n));
+    return res;
+}
+const ar = [1, 2, 4, 5, 100]; 
+ar.filter(n => n % 2 === 0).forEach(n => console.log(n));
+/******************************* */
+//how to get array's length
+const arr1 = [];
+arr1[100000000] = 10;
+console.log(`length of arr1a
+`)
