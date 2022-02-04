@@ -1,74 +1,66 @@
-const circle = {radius: 20, square: function(){
-    return 3.14 * (this.radius ** 2)
-}, perimeter: () => 2 * 3.14 * this.radius,
-toString: function(){
-    return `radius of this circle is ${this.radius}`
-}};
-console.log(`square=${circle.square()}, perimeter=${circle.perimeter()}`);
-//circle.square will be converted to square(circle) where circle as argument value,
-// "this" is the hidden parameter in the function
-// in any arrow function there is not "this"
-function square(circle){
-    return 3.14 * (circle.radius ** 2);
+class Person {
+    #id;
+    #name;
+    constructor(id,name){
+        this.#id = id;
+        this.#name = name;
+    }
+    getId(){
+        return this.#id;
+    }
+    getName(){
+        return this.#name;
+    }
+    toString(){
+        return `id: ${this.#id}; name: ${this.#name}`
+    }
 }
-console.log(`circle: ${circle}`)
-const circle1 = {radius: 20, perimeter: function() {
-    return 2 * 3.14 * this.radius},
-toString: function(){
-    return `radius of this circle is ${this.radius}`
-}};
-//circle1.square(); error because the method square is not defined inside object circle
-function Circle(radius) {
-    this.radius = radius;
+const person = new Person(123, 'Moshe');
+console.log(`Person is ${person}`)
+class Employee extends Person{
+    #salary;
+    constructor(id, name, salary){
+        super(id, name);
+        this.#salary = salary;
+    }
+    computeSalary(){
+        return this.#salary
+    }
+    toString(){
+        return super.toString() + ` salary: ${this.computeSalary()}`
+    }
 }
-Circle.prototype.square = function() {
-    3.14 * (this.radius ** 2);
+const person2 = new Employee(124, "Sarah", 5000);
+console.log(`Person2 is ${person2}`);
+console.log(typeof(person2)) //just object
+console.log(person2.constructor.name) //only this way JS allow geeting constructor name
+class Child extends Person{
+    #kindergarten
+    constructor(id, name, kindergarten){
+        super(id, name);
+        this.#kindergarten = kindergarten;
+    }
+    getKindergarten(){
+        return this.#kindergarten;
+    }
+    toString(){
+        return super.toString() + ` kindergarten: ${this.#kindergarten}`
+    }
 }
-Circle.prototype.perimeter = function() {
-    return 2 * 3.14 * this.radius
+const person3 = new Child(125, 'Yakov', 'Shalom');
+console.log(`Person3 is ${person3}`);
+
+class WageEmployee extends Employee{
+    #hours
+    #wage
+    constructor(id, name, salary, hours, wage){
+        super(id, name, salary);
+        this.#hours = hours;
+        this.#wage = wage;
+    }
+    computeSalary(){
+        return super.computeSalary() + this.#hours * this.#wage
+    }
 }
-Circle.prototype.toString = function() {
-    return `radius of this circle is ${this.radius}`
-}
-const circle10 = new Circle(10);
-/**********************HW 16 definition */
-// const d = new Deferred()
-// d.then(function(res){ console.log('1', res); return 'a'; });
-// d.then(function(res){ console.log('2', res); return 'b'; });
-// d.then(function(res){ console.log('3', res); return 'c'; });
-// d.resolve('hello');
-//Output:
-//1 hello
-//2 a
-//3 b
-/*************************************** */
-// const myArray = new MyArray(10);
-//myArray.get(index) - result 10
-//write method get getting an index value and returning common value (set in constructor)
-//myArray.set(index, value);
-//write method set that sets a given value at a given index
-//myArray.setValue(value) - sets new value in all elements of myArray
-//Example:
-// const myArray = new MyArray(10);
-// console.log(myArray.get(100)) //displayed out 10
-// myArray.set(100, 500) //sets 500 at index 100
-// console.log(myArray.get(200)) //displayed out 10
-// console.log(myArray.get(100)) //displayed out 500
-// myArray.setValue(300);
-// console.log(myArray.get(100)) //displayed out 300
-// console.log(myArray.get(200)) //displayed out 300
-/************************************************ */
-Array.prototype.filter = function(callbackPredicate) {
-    console.log('Tel-Ran copyright')
-    const res = []
-    this.forEach((n, i, a) => !callbackPredicate(n, i, a) && res.push(n));
-    return res;
-}
-const ar = [1, 2, 4, 5, 100]; 
-ar.filter(n => n % 2 === 0).forEach(n => console.log(n));
-/******************************* */
-//how to get array's length
-const arr1 = [];
-arr1[100000000] = 10;
-console.log(`length of arr1a
-`)
+const person4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
+console.log(`Person4 is ${person4}`)
