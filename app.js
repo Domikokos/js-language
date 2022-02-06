@@ -28,14 +28,13 @@
 // console.log(ar2);
 // someFunction();
 
-const ar20 = [13, 17, 20, 23, 2, 40];
+const ar20 = [13, 17, 20, 23, 2, 4];
 const arEvenOdd = ar20.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
 console.log(arEvenOdd);
 
-const res = ar20.reduce((res, cur) => res + cur, 0);
+res = myReduce(ar20,(res, cur) => res + cur);
 console.log(res);
-const max = ar20.reduce((max, cur) => cur > max )
+const max = myReduce(ar20,(max, cur)=>cur > max ? cur : max);
 console.log(max);
 console.log(res);
-res = ar20.reduce((res, cur) => res + cur);
 
