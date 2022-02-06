@@ -16,7 +16,7 @@ class Person {
     }
 }
 const person = new Person(123, 'Moshe');
-console.log(`Person is ${person}`)
+//console.log(`Person is ${person}`)
 class Employee extends Person{
     #salary;
     constructor(id, name, salary){
@@ -31,9 +31,9 @@ class Employee extends Person{
     }
 }
 const person2 = new Employee(124, "Sarah", 5000);
-console.log(`Person2 is ${person2}`);
-console.log(typeof(person2)) //just object
-console.log(person2.constructor.name) //only this way JS allow geeting constructor name
+//console.log(`Person2 is ${person2}`);
+//console.log(typeof(person2)) //just object
+//console.log(person2.constructor.name) //only this way JS allow geeting constructor name
 class Child extends Person{
     #kindergarten
     constructor(id, name, kindergarten){
@@ -48,7 +48,7 @@ class Child extends Person{
     }
 }
 const person3 = new Child(125, 'Yakov', 'Shalom');
-console.log(`Person3 is ${person3}`);
+//console.log(`Person3 is ${person3}`);
 
 class WageEmployee extends Employee{
     #hours
@@ -63,4 +63,26 @@ class WageEmployee extends Employee{
     }
 }
 const person4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
-console.log(`Person4 is ${person4}`)
+//console.log(`Person4 is ${person4}`)
+
+/*****************************Homework 17 solution */
+const persons = [
+    new Child(100, 'Olya', 'Shalom'),
+    new Child(101, 'Serega', "Boker"),
+    new Child(102, 'Kolya', 'Shalom'),
+    new Employee(103, 'Vasya', 1000),
+    new WageEmployee(104, 'Tolya', 1000, 10, 100)
+]
+function countOfPersonType(persons, type) {
+    return persons.filter(n => n.constructor.name === type).length;
+}
+function computeSalaryBudget(persons) {
+   return persons.filter(n => n.constructor.name !== "Child").reduce((sum, per) => sum + per.computeSalary(), 0);
+}
+function countChildrenGindergarten(persons, kindergarten) {
+    return persons.reduce((count, per) => {per.constructor.name === "Child" && per.getKindergarten() === kindergarten && count++;
+    return count}, 0)
+}
+console.log(countOfPersonType(persons, 'Child'));
+console.log(computeSalaryBudget(persons));
+console.log(countChildrenGindergarten(persons, 'Shalom'));
