@@ -77,8 +77,13 @@ function countOfPersonType(persons, type) {
     return persons.filter(n => n.constructor.name === type).length;
 }
 function computeSalaryBudget(persons) {
-   return persons.filter(n => n.constructor.name !== "Child").reduce((sum, per) => sum + per.computeSalary(), 0);
+   //return persons.filter(n => n.constructor.name !== "Child").reduce((sum, per) => sum + per.computeSalary(), 0);
+   const allEmployees = persons.filter(p => !!p.computeSalary);
+   const salaryValues = allEmployees.map(p => p.computeSalary())
+   return salaryValues.reduce((res, cur) => res + cur);
 }
+//const allEmployees = persons.filter(p => !!p.computeSalary);
+//return allEmployees.reduce((res, cur) => res + cur.computeSalary(), 0); 
 function countChildrenGindergarten(persons, kindergarten) {
     return persons.reduce((count, per) => {per.constructor.name === "Child" && per.getKindergarten() === kindergarten && count++;
     return count}, 0)
@@ -86,3 +91,10 @@ function countChildrenGindergarten(persons, kindergarten) {
 console.log(countOfPersonType(persons, 'Child'));
 console.log(computeSalaryBudget(persons));
 console.log(countChildrenGindergarten(persons, 'Shalom'));
+
+function testOutput(fun, expected){
+    console.log(`function: ${fun.name} ; expected result: ${expected} ; actual result: ${fun()}`)
+}
+//testOutput(person4.computeSalary.bind(person4), 2000);
+testOutput(computeSalaryBudget.bind(undefined, persons), 3000)
+testOutput(countOfPersonType.bind(undefined, persons, 'Child'), 3)
